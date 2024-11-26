@@ -1,11 +1,14 @@
 import java.util.ArrayList;
+import java.time.LocalDate;
 
-public abstract class Medlem  {
+public class Medlem  {
 
     protected ArrayList<Person> person = new ArrayList();
+    protected LocalDate dato;
 
 
     public Medlem() {}
+
 
 
 
