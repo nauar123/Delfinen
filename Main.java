@@ -3,12 +3,5 @@ public class Main {
 
 
 
-        Medlem [] medlem = new Medlem[10];
-        Medlem medlem1 = new Medlem();
-
-
-
-
-
     }
 }
