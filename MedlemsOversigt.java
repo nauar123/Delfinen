@@ -4,10 +4,7 @@ public class MedlemsOversigt {
 
     protected ArrayList<Medlem> medlemmer;
 
-
     public MedlemsOversigt() {}
-
-
 
 
 }
