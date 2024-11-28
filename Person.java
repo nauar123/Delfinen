@@ -1,17 +1,17 @@
 public abstract class Person {
 
     protected String navn;
-    protected int alder;
+    protected int foedselsDato;
     protected String mail;
     protected int tlfNr;
 
 
     public Person() {}
 
-    public Person(String navn, int alder, String mail,int tlfNr)
+    public Person(String navn, int foedselsDato, String mail,int tlfNr)
     {
         this.navn = navn;
-        this.alder = alder;
+        this.foedselsDato = foedselsDato;
         this.mail = mail;
         this.tlfNr = tlfNr;
     }
@@ -21,9 +21,9 @@ public abstract class Person {
         return navn;
     }
 
-    public int getAlder()
+    public int getFoedselsDato()
     {
-        return alder;
+        return foedselsDato;
     }
 
     public String getMail()
@@ -35,4 +35,6 @@ public abstract class Person {
     {
         return tlfNr;
     }
+
+
 }

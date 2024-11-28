@@ -11,18 +11,24 @@ public class Medlem extends Person {
     public Medlem() {}
 
 
-    public Medlem( LocalDate dato, int medlemsId, boolean erAktiv)
+    public Medlem( String navn, int foedselsDato, String mail, int tlfNr, LocalDate dato, int medlemsId, boolean erAktiv)
     {
-
+        super(navn, foedselsDato, mail, tlfNr);
         this.oprettelsesDato = dato;
         this.medlemsId = medlemsId;
         this.erAktiv = erAktiv;
     }
 
+    
+
+
+
     public int getMedlemsId()
     {
         return medlemsId;
     }
+
+
 
 
 
