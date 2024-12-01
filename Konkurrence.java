@@ -17,4 +17,22 @@ public class Konkurrence {
         this.dagsDato = dagsDato;
     }
 
+
+    public String getStaevne()
+    {
+        return staevne;
+    }
+    public String getPlacering()
+    {
+        return placering;
+    }
+    public LocalDate getDagsDato()
+    {
+        return dagsDato;
+    }
+    public ArrayList<Medlem> getDeltagere()
+    {
+        return deltagere;
+    }
+
 }

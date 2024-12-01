@@ -1,19 +1,22 @@
+import java.time.LocalDate;
+
 public abstract class Person {
 
     protected String navn;
-    protected int foedselsDato;
+    protected int foedelsdato;
     protected String mail;
     protected int tlfNr;
 
 
     public Person() {}
 
-    public Person(String navn, int foedselsDato, String mail,int tlfNr)
+    public Person(String navn, int foedelsdato, String mail,int tlfNr)
     {
         this.navn = navn;
-        this.foedselsDato = foedselsDato;
+        this.foedelsdato = foedelsdato;
         this.mail = mail;
         this.tlfNr = tlfNr;
+
     }
 
     public String getNavn()
@@ -21,9 +24,9 @@ public abstract class Person {
         return navn;
     }
 
-    public int getFoedselsDato()
+    public int getFoedelsdato()
     {
-        return foedselsDato;
+        return foedelsdato;
     }
 
     public String getMail()
@@ -35,6 +38,9 @@ public abstract class Person {
     {
         return tlfNr;
     }
+
+
+
 
 
 }

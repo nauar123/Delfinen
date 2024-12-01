@@ -1,20 +1,20 @@
 public class Betalinger {
 
-    protected String betalt;
+    protected boolean betalt = true;
     protected Restance restance;
     protected int rabat;
 
 
-    public Betalinger() {
-    }
+    public Betalinger() {}
 
-    public Betalinger(String betalt, Restance restance, int rabat) {
+    public Betalinger(boolean betalt, Restance restance, int rabat) {
         this.betalt = betalt;
         this.restance = restance;
         this.rabat = rabat;
     }
 
-    public String getBetalt() {
+    public boolean getBetalt()
+    {
         return betalt;
     }
 

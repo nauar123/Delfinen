@@ -2,24 +2,19 @@ import java.time.LocalDate;
 
 public class CprNr
 {
-    String nummeret;
+    private String nummeret;
 
     public CprNr()
     {}
 
-    public CprNr(String etCprNr)
+    public CprNr(String nummeret)
     {
-        nummeret = etCprNr;
+        this.nummeret = nummeret;
     }
 
-    public String getCprNr()
+    public String getNummeret()
     {
         return nummeret;
-    }
-
-    public void setCprNr(String etCprNr)
-    {
-        nummeret = etCprNr;
     }
 
     public int getDag()
@@ -48,31 +43,12 @@ public class CprNr
         return aarhundrede + Integer.parseInt(nummeret.substring(4,6));
     }
 
-    // Precondition: nummeret indeholder en korrekt dato
-    public Dato getDato()
+    public Dato getFoedselsdato()
     {
-        Dato d = new Dato(getAar(),getMaaned(),getDag());
-
-        return d;
+        return new Dato(getDag(),getMaaned(),getAar());
     }
 
-    public int getAlder()
-    {
-        LocalDate dd = LocalDate.now();
-        Dato iDag = new Dato(dd.getYear(),dd.getMonthValue(),dd.getDayOfMonth());
-        return (iDag.getDatoen() - getDato().getDatoen()) / 10000;
-    }
 
-    public boolean erMand()
-    {
-        int n = Integer.parseInt(nummeret.substring(9,10));
-        return n % 2 == 1;
-    }
-
-    public boolean erKvinde()
-    {
-        return !erMand();
-    }
 
 
 

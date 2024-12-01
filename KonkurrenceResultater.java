@@ -16,7 +16,23 @@ public class KonkurrenceResultater {
             this.distance = distance;
         }
 
+        public int getTid()
+        {
+            return tid;
+        }
 
+        public String getSvoemmeDiciplin()
+        {
+            return svoemmeDiciplin;
+        }
+        public String getDistance()
+        {
+            return distance;
+        }
+        public ArrayList<Konkurrence> getKonkurrence()
+        {
+            return konkurrence;
+        }
 
 
 }

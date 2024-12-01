@@ -6,5 +6,8 @@ public class KonkurrenceOversigt {
 
     public KonkurrenceOversigt() {}
 
-
+    public ArrayList<Konkurrence> getKonkurrence()
+    {
+        return konkurrence;
+    }
 }

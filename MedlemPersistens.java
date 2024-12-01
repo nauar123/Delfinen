@@ -1,10 +1,11 @@
 import java.util.ArrayList;
 
-public class MedlemsOversigt {
+public class MedlemPersistens {
 
     protected ArrayList<Medlem> medlemmer;
 
-    public MedlemsOversigt() {}
+
+    public MedlemPersistens() {}
 
     public ArrayList<Medlem> getMedlemmer()
     {
