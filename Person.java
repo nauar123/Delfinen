@@ -15,6 +15,21 @@ public abstract class Person {
         this.mail = mail;
         this.tlfNr = tlfNr;
         this.cprNr = cprNr;
-
     }
+
+    public String getNavn()
+    {
+        return navn;
+    }
+
+    public String getMail()
+    {
+        return mail;
+    }
+
+    public int getTlfNr()
+    {
+        return tlfNr;
+    }
+
 }

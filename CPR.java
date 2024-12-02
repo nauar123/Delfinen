@@ -11,8 +11,6 @@ public class CPR
         this.nummeret = nummeret; // Initialisering af nummeret
     }
 
-
-
     public CPR(boolean generateRandom)
     {
         if (generateRandom)

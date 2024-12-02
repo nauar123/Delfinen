@@ -14,27 +14,25 @@ public class Betalinger {
     }
 
     public int udregnBetalinger(Medlem medlem) {
-        int medlemsKontigent = 0;
+        int restance = 0;
 
         if (medlem.getMedlemsStatus().equalsIgnoreCase("Aktiv")) // Hvis medlemmmet er aktivt, går de igennem de her ifs
         {
             if (medlem.getAlderKatogori().equalsIgnoreCase("Junior")) {
-                return medlemsKontigent = 1000;
+                return restance = 1000;
 
             } else if (medlem.getAlderKatogori().equalsIgnoreCase("Senior")) {
-                return medlemsKontigent = 1600;
+                return restance = 1600;
 
             } else if (medlem.getAlderKatogori().equalsIgnoreCase("Senior") && medlem.getAlder() >= 60) {
-                return medlemsKontigent = (int) (1600 * rabat); // 25% for seniors over 60 år.
+                return restance = (int) (1600 * rabat); // 25% for seniors over 60 år.
 
             } else if(medlem.getMedlemsStatus().equalsIgnoreCase("Passiv"))
-                return medlemsKontigent; // passive medlemmer
+                return restance; // passive medlemmer
         }
 
-        return medlemsKontigent = 500;
+        return restance= 500;
     }
-
-
 
     public int udregnRestance(Medlem medlem) {
         int medlemsKontigent = 0;

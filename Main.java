@@ -6,5 +6,9 @@ public class Main {
         MedlemsOversigt medlemsOversigt = new MedlemsOversigt();
         System.out.println(medlemsOversigt);
 
+
+        MedlemPersistens medlemPersistens = new MedlemPersistens();
+
+        medlemPersistens.writeMedlemPersistens(medlemsOversigt);
     }
 }
