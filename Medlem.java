@@ -7,45 +7,76 @@ public class Medlem extends Person {
     protected ArrayList<Person> person = new ArrayList();
     protected LocalDate oprettelsesDato;
     protected int medlemsId;
-    protected boolean erAktiv;
+    protected boolean aktivStatus;
+    protected boolean erMotionist;
+    protected Betalinger betalinger;
+    protected boolean restance;
 
 
-    public Medlem( String navn, int foedselsdato, String mail, int tlfNr, LocalDate dato, int medlemsId, boolean erAktiv)
-    {
-        super(navn,foedselsdato, mail, tlfNr);
+    public Medlem(String navn, String mail, int tlfNr, CPR cprNr, LocalDate dato, int medlemsId,boolean aktivStatus, boolean erMotionist, Betalinger betalinger, boolean restance) {
+        super(navn, mail, tlfNr, cprNr);
         this.oprettelsesDato = dato;
         this.medlemsId = medlemsId;
-        this.erAktiv = erAktiv;
+        this.aktivStatus = aktivStatus;
+        this.erMotionist = erMotionist;
+        this.betalinger = betalinger;
+        this.restance = restance;
     }
 
-    public ArrayList<Person> getPerson()
+    public String getMedlemsStatus()
     {
-        return person;
-    }
-    public LocalDate getOprettelsesDato()
-    {
-        return oprettelsesDato;
-    }
-
-    public int getMedlemsId()
-    {
-        return medlemsId;
+        if (aktivStatus == true)
+        {
+            return "Aktiv";
+        }
+        {
+            return "Passiv";
+        }
     }
 
-    public boolean isErAktiv()
+    public String getMedlemsType()
     {
-        return erAktiv;
+        if(erMotionist == true)
+        {
+            return "Er Motionist";
+        }
+        return "Er konkurrence deltager";
     }
 
+    public int getAlder()
+    {
+        return cprNr.getAlder();
+    }
+
+    public String getAlderKatogori() {
+        int alder = cprNr.getAlder();
+        if (alder < 18) {
+            return "Junior";
+        } else {
+            return "Senior";
+        }
+
+
+    }
     public String toString ()
     {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy"); // beskriver, hvordan datoer skal vises.
 
         return "Medlem: " + navn +  " \n" +
-                "Fødselsdag:" + foedelsdato  + "\n" +
+                "CPR:" + cprNr +  " \n" +
+                "Alder:" + cprNr.getAlder() +  " \n" +
+                " Junior/Senior:" + getAlderKatogori() + "\n" +
                 "Mail:" + mail + "\n" +
                 "TelefonNr:" + tlfNr + "\n" +
                 "Oprettelsesdato:" + oprettelsesDato + "\n" +
-                "Medlemdsid:" + medlemsId + "\n";
+                "Medlemdsid:" + medlemsId + "\n" +
+                "Aktivtivesstatus:" + getMedlemsStatus() + "\n" +
+                "Motionists/Kokurrence deltager:" + getMedlemsType() + "\n" +
+                "Skal betale:" + betalinger.udregnBetalinger(this) + "DKK" + " \n " +
+                "Skylder:" + betalinger.udregnRestance(this) + "DDK" + "\n\n";
+
+
     }
+
+
 }
