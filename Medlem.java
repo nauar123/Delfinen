@@ -10,17 +10,17 @@ public class Medlem extends Person {
     protected boolean aktivStatus;
     protected boolean erMotionist;
     protected Betalinger betalinger;
-    protected boolean restance;
+    protected boolean erRestance;
 
 
-    public Medlem(String navn, String mail, int tlfNr, CPR cprNr, LocalDate dato, int medlemsId,boolean aktivStatus, boolean erMotionist, Betalinger betalinger, boolean restance) {
+    public Medlem(String navn, String mail, int tlfNr, CPR cprNr, LocalDate dato, int medlemsId,boolean aktivStatus, boolean erMotionist, Betalinger betalinger, boolean erRestance) {
         super(navn, mail, tlfNr, cprNr);
         this.oprettelsesDato = dato;
         this.medlemsId = medlemsId;
         this.aktivStatus = aktivStatus;
         this.erMotionist = erMotionist;
         this.betalinger = betalinger;
-        this.restance = restance;
+        this.erRestance = erRestance;
     }
 
     public int getMedlemsId()

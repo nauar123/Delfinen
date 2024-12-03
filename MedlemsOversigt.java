@@ -5,10 +5,17 @@
   public class MedlemsOversigt {
 
       protected ArrayList<Medlem> medlemmereOversigt;
+      protected Restance restance;
 
       public MedlemsOversigt() {
           medlemmereOversigt = new ArrayList<>(); // Initialiserer listen
           createMedlemmereOversigt();
+          this.restance = restance;
+      }
+
+      public Restance getRestance()
+      {
+          return restance;
       }
 
       public ArrayList<Medlem> getMedlemmerOversigt() {
@@ -79,5 +86,14 @@
               sb.append(medlemmereOversigt.get(i).toString());
           }
           return sb.toString();
+      }
+
+      public void addAlleMedlemmeretoRestanceList() {
+          for (Medlem m : medlemmereOversigt) {
+              if (m.erRestance) {
+                  restance.addMedlemToRestance(m);
+                  System.out.println("Added to RestanceListe: " + m.getNavn());
+              }
+          }
       }
   }

@@ -11,6 +11,12 @@ public class Main {
 
 
 
+        medlemsOversigt.addAlleMedlemmeretoRestanceList();
+
+
+        RestancePersistens restancePersistens = new RestancePersistens(medlemsOversigt);
+        restancePersistens.writeRestancePersistens();
+
 
     }
 }

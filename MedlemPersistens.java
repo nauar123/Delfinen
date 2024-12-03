@@ -28,6 +28,8 @@ public class MedlemPersistens {
 
                 // Skriv medlemmet til filen
                 writer.write("Navn: " + medlem.getNavn() + "\n");
+                writer.write("Cprnummer:" + medlem.cprNr + "\n");
+                writer.write("Alder: " + medlem.getAlder() + "\n");
                 writer.write("Email: " + medlem.getMail() + "\n");
                 writer.write("TelefonNr: " + medlem.getTlfNr() + "\n");
                 writer.write("Oprettelsesdato: " + medlem.getOprettelsesDato().format(dateFormatter) + "\n");
