@@ -23,6 +23,16 @@ public class Medlem extends Person {
         this.restance = restance;
     }
 
+    public int getMedlemsId()
+    {
+        return medlemsId;
+    }
+
+    public LocalDate getOprettelsesDato()
+    {
+        return oprettelsesDato;
+    }
+
     public String getMedlemsStatus()
     {
         if (aktivStatus == true)
