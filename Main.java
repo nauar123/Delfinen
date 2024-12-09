@@ -18,6 +18,13 @@ public class Main {
         restancePersistens.writeRestancePersistens();
 
 
+
+
+        GUI gui = new GUI();
+        gui.setVisible(true);
+
+
+
     }
 }
 

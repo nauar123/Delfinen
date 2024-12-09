@@ -1,172 +1,136 @@
 import java.time.LocalDate;
 import java.util.Random;
 
+public class CPR {
+    private String nummeret; // CPR nummeret som String
 
-public class CPR
-{
-    private String nummeret;
-
-    // Sørg for, at nummeret bliver sat
-    public CPR(String nummeret) {
-        this.nummeret = nummeret; // Initialisering af nummeret
+    public CPR() {
+        // Default constructor
     }
 
-    public CPR(boolean generateRandom)
-    {
-        if (generateRandom)
-        {
+    public CPR(String n) {
+        this.nummeret = n;
+    }
+
+    public CPR(boolean generateRandom) {
+        if (generateRandom) {
             this.nummeret = generateRandomCPR();
-        } else
-        {
+        } else {
             this.nummeret = "";
         }
     }
 
+    public int getGender() {
+        if (nummeret == null || nummeret.length() < 10) {
+            throw new IllegalArgumentException("Invalid CPR number");
+        }
+        return Integer.parseInt(nummeret.substring(9, 10)); // Get the gender digit
+    }
 
-    public String getCprNr()
-    {
+    public String getCprNr() {
         return nummeret;
     }
 
-    public void setCprNr(String n)
-    {
-        nummeret = n;
+    public void setCprNr(String n) {
+        this.nummeret = n;
     }
 
-    public int getDag()
-    {
-        return Integer.parseInt(nummeret.substring(0, 2));
+    public int getDag() {
+        if (nummeret != null && nummeret.length() >= 2) {
+            return Integer.parseInt(nummeret.substring(0, 2)); // Extract day
+        }
+        return -1; // Invalid value for day
     }
 
-    public int getMaaned()
-    {
-        return Integer.parseInt(nummeret.substring(2, 4));
+    public int getMaaned() {
+        if (nummeret != null && nummeret.length() >= 4) {
+            return Integer.parseInt(nummeret.substring(2, 4)); // Extract month
+        }
+        return -1; // Invalid value for month
     }
 
     public int getAar() {
-        int yearPart = Integer.parseInt(nummeret.substring(4, 6));  // De sidste to cifre af året (yy)
-        char centuryIndicator = nummeret.charAt(6);  // 7. ciffer i CPR-nummeret
-
-        int aarhundrede;
-
-        if (centuryIndicator >= '0' && centuryIndicator <= '3') {
-            aarhundrede = 1900;
-        } else if ((centuryIndicator == '4' || centuryIndicator == '9') && yearPart <= LocalDate.now().getYear() % 100) {
-            aarhundrede = 2000;  // Når vi er efter år 2000
-        } else if (centuryIndicator == '2' || centuryIndicator == '5' || centuryIndicator == '6') {
-            aarhundrede = 1900;  // Default to 1900s for normal 2/5/6 indicators
-        } else {
-            aarhundrede = 1800;
+        if (nummeret != null && nummeret.length() >= 6) {
+            int yearPart = Integer.parseInt(nummeret.substring(4, 6)); // Extract last 2 digits of year
+            int century = (yearPart < 24) ? 2000 : 1900; // Determine century
+            return century + yearPart;
         }
-
-        int year = aarhundrede + yearPart;
-
-        // Ensure age is between 10 and 110
-        int currentYear = LocalDate.now().getYear();
-        int age = currentYear - year;
-
-
-
-        if (age < 10) {
-            year -= 90;  // Adjust to older century
-        } else if (age > 100) {
-            year += 90;  // Adjust to newer century
-        }
-
-        return year;
+        return -1; // Invalid year
     }
 
-    public Dato getDato()
-    {
-        Dato d = new Dato(getDag(), getMaaned(), getAar());
-        return d;
+    public Dato getDato() {
+        return new Dato(getDag(), getMaaned(), getAar());
     }
-
-    ;
 
     public int getAlder() {
-        LocalDate foedselsdag = LocalDate.of(getAar(), getMaaned(), getDag());
-        LocalDate iDag = LocalDate.now();
+        LocalDate birthDate = LocalDate.of(getAar(), getMaaned(), getDag());
+        LocalDate today = LocalDate.now();
+        int age = today.getYear() - birthDate.getYear();
 
-        int alder = iDag.getYear() - foedselsdag.getYear();
-
-        // Tjek om fødselsdagen i år endnu ikke er sket
-        if (iDag.getMonthValue() < foedselsdag.getMonthValue() ||
-                (iDag.getMonthValue() == foedselsdag.getMonthValue() && iDag.getDayOfMonth() < foedselsdag.getDayOfMonth())) {
-            alder--;  // Træk 1 fra, hvis fødselsdagen ikke er sket endnu
+        if (today.getMonthValue() < birthDate.getMonthValue() ||
+                (today.getMonthValue() == birthDate.getMonthValue() && today.getDayOfMonth() < birthDate.getDayOfMonth())) {
+            age--;
         }
 
-        return alder;
+        return age;
     }
 
-
-    public boolean erMand()
-    {
-        if (Integer.parseInt(nummeret.substring(9, 10)) % 2 != 0)
-            return true;
-        return false;
+    public boolean erMand() {
+        return Integer.parseInt(nummeret.substring(9, 10)) % 2 != 0;
     }
 
-    public boolean erKvinde()
-    {
+    public boolean erKvinde() {
         return !erMand();
-
     }
 
-    public boolean isValid()
-    {
-        if (nummeret.length() != 10)
-            return false;
+    public boolean isValid() {
+        if (nummeret == null || nummeret.length() != 10) {
+            return false; // Ensure it's a valid CPR number with exactly 10 digits
+        }
 
-        for (int i = 0; i < 10; i++)
-            if (nummeret.charAt(i) < '0' || nummeret.charAt(i) > '9')
-                return false;
+        for (int i = 0; i < 10; i++) {
+            if (nummeret.charAt(i) < '0' || nummeret.charAt(i) > '9') {
+                return false; // Ensure that all characters are digits
+            }
+        }
 
-        if (!getDato().valid())
-            return false;
+        if (!getDato().valid()) {
+            return false; // Validate the date of birth
+        }
 
-        int udregnet = 0;
-        int[] vaegte = {4, 3, 2, 7, 6, 5, 4, 3, 2, 1};
+        int[] weights = {4, 3, 2, 7, 6, 5, 4, 3, 2, 1};
+        int calculatedChecksum = 0;
 
-        for (int i = 0; i < 10; i++)
-            udregnet += vaegte[i] * Integer.parseInt("" + nummeret.charAt(i));
-        // valdemar gjorde sådan her: udregnet += vaegte[i] *nummeret.charAt(i) - '0';
+        for (int i = 0; i < 10; i++) {
+            calculatedChecksum += weights[i] * Integer.parseInt(String.valueOf(nummeret.charAt(i)));
+        }
 
-        if (udregnet % 11 != 0)
-            return false;
-
-        return true;
+        return calculatedChecksum % 11 == 0; // Validates the checksum
     }
 
-    public String toString()
-    {
+    public String toString() {
         return nummeret;
     }
 
-
     private String generateRandomCPR() {
         Random random = new Random();
+        LocalDate currentDate = LocalDate.now();
 
-        LocalDate currentDato = LocalDate.now();
-        int minYear = currentDato.getYear() - 110;
-        int maxYear = currentDato.getYear() - 10;
+        int minAge = 10;
+        int maxAge = 100;
+
+        int minYear = currentDate.getYear() - maxAge;
+        int maxYear = currentDate.getYear() - minAge;
+
         int year = minYear + random.nextInt(maxYear - minYear + 1);
+        int month = 1 + random.nextInt(12);
+        int day = 1 + random.nextInt(28);
 
-        int day = 1 + random.nextInt(28);  // Random day between 1 and 28 (avoid invalid dates)
-        int month = 1 + random.nextInt(12);  // Random month between 1 and 12
-
-        // Birthdate (DDMMYY)
         String birthDate = String.format("%02d%02d%02d", day, month, year % 100);
 
-        // Century indicator (based on year)
-        char centuryIndicator = (year >= 2000) ? '4' : (year >= 1900) ? '2' : '5';
+        int randomDigits = random.nextInt(10000); // Generate 4 random digits
+        String randomPart = String.format("%04d", randomDigits); // Always 4 digits
 
-        // Generate random 4-digit number (XXXX)
-        int genderPart = random.nextInt(10000);
-        String genderDigit = String.format("%03d", genderPart) + (random.nextBoolean() ? "1" : "2");
-
-        return birthDate + centuryIndicator + genderDigit;
+        return birthDate + "-" + randomPart; // Return the generated CPR number
     }
-
-
 }

@@ -2,9 +2,9 @@ import java.util.ArrayList;
 
 public class Restance {
 
-    ArrayList<Medlem> restanceListe = new ArrayList<>();
+    private ArrayList<Medlem> restanceListe = new ArrayList<>();
 
-    public Restance(ArrayList<Medlem> restanceListe)
+    public Restance()
     {
         this.restanceListe = new ArrayList<>();
     }

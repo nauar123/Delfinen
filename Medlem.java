@@ -10,7 +10,7 @@ public class Medlem extends Person {
     protected boolean aktivStatus;
     protected boolean erMotionist;
     protected Betalinger betalinger;
-    protected boolean erRestance;
+    protected boolean erRestance = false;
 
 
     public Medlem(String navn, String mail, int tlfNr, CPR cprNr, LocalDate dato, int medlemsId,boolean aktivStatus, boolean erMotionist, Betalinger betalinger, boolean erRestance) {
@@ -31,6 +31,11 @@ public class Medlem extends Person {
     public LocalDate getOprettelsesDato()
     {
         return oprettelsesDato;
+    }
+
+    public Boolean getRestance()
+    {
+        return erRestance;
     }
 
     public String getMedlemsStatus()

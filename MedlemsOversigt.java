@@ -10,13 +10,15 @@
       public MedlemsOversigt() {
           medlemmereOversigt = new ArrayList<>(); // Initialiserer listen
           createMedlemmereOversigt();
-          this.restance = restance;
+          this.restance = new Restance();
       }
 
       public Restance getRestance()
       {
           return restance;
       }
+
+
 
       public ArrayList<Medlem> getMedlemmerOversigt() {
           return medlemmereOversigt;
